@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quiz & Weather Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <a href="#home" class="brand">
+        <span>Q</span>uiz<span>+</span>Weather
+    </a>
+
+    <nav>
+        <a href="#quiz">Quiz</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#weather">Weather</a>
+    </nav>
+
+    <button id="themeBtn" class="icon-btn" type="button">
+        ☾
+    </button>
+
+</header>
+
+
+<main>
+
+<!-- ================= HERO ================= -->
+
+<section id="home" class="section hero">
+
+    <div class="hero-copy">
+
+        <p class="eyebrow">
+            INTERACTIVE WEB PROJECT
+        </p>
+
+        <h1>
+            Test your knowledge.
+            <br>
+            <em>Check the weather.</em>
+        </h1>
+
+        <p class="hero-text">
+            A responsive quiz dashboard with a countdown timer,
+            persistent local leaderboard, and live weather search.
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="#quiz" class="btn primary">
+                Start Quiz
+            </a>
+
+            <a href="#weather" class="btn secondary">
+                View Weather
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-card">
+
+        <div class="mini-top">
+            <span class="status-dot"></span>
+            Dashboard ready
+        </div>
+
+        <div class="mini-score">
+            <strong>10</strong>
+            <span>questions</span>
+        </div>
+
+        <div class="mini-grid">
+
+            <div>
+                <b>60s</b>
+                <span>timer</span>
+            </div>
+
+            <div>
+                <b>Local</b>
+                <span>storage</span>
+            </div>
+
+            <div>
+                <b>Live</b>
+                <span>weather</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= QUIZ ================= -->
+
+<section id="quiz" class="section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                01 / QUIZ
+            </p>
+
+            <h2>
+                Timed Interactive Quiz
+            </h2>
+
+        </div>
+
+
+        <div class="quiz-meta">
+
+            <div id="timer" class="timer">
+                01:00
+            </div>
+
+            <span id="progressText">
+                Question 1 / 10
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- START SCREEN -->
+
+    <div id="quizStart" class="panel start-panel">
+
+        <div class="big-icon">
+            ?
+        </div>
+
+        <h3>
+            Ready to play?
+        </h3>
+
+        <p>
+            Answer 10 general computer-science questions
+            before the 60-second timer runs out.
+        </p>
+
+        <label class="name-label" for="playerName">
+            Your name
+        </label>
+
+        <input
+            id="playerName"
+            type="text"
+            maxlength="24"
+            placeholder="Enter your name"
+        >
+
+        <br>
+
+        <button id="startBtn" class="btn primary" type="button">
+            Start Quiz
+        </button>
+
+        <p class="tiny">
+            Your score is stored only in this browser
+            using Local Storage.
+        </p>
+
+    </div>
+
+
+    <!-- QUIZ GAME -->
+
+    <div id="quizGame" class="panel hidden">
+
+        <div class="progress-track">
+            <div id="progressBar"></div>
+        </div>
+
+        <p id="questionNumber" class="question-number">
+            QUESTION 01
+        </p>
+
+        <h3 id="questionText"></h3>
+
+        <div id="options" class="options"></div>
+
+
+        <div class="game-actions">
+
+            <button
+                id="nextBtn"
+                class="btn primary"
+                type="button"
+                disabled
+            >
+                Next Question
+            </button>
+
+            <button
+                id="quitBtn"
+                class="btn ghost"
+                type="button"
+            >
+                Quit
+            </button>
+
+        </div>
+
+        <p
+            id="answerMessage"
+            class="answer-message"
+            aria-live="polite"
+        ></p>
+
+    </div>
+
+
+    <!-- RESULT -->
+
+    <div id="quizResult" class="panel result-panel hidden">
+
+        <div class="result-badge">
+            ✓
+        </div>
+
+        <p class="eyebrow">
+            QUIZ COMPLETE
+        </p>
+
+        <h3 id="resultTitle">
+            Great job!
+        </h3>
+
+        <div class="result-score">
+
+            <span id="finalScore">
+                0
+            </span>
+
+            <small>
+                / 10
+            </small>
+
+        </div>
+
+        <p id="resultMessage"></p>
+
+        <div class="result-actions">
+
+            <button
+                id="restartBtn"
+                class="btn primary"
+                type="button"
+            >
+                Play Again
+            </button>
+
+            <a
+                href="#leaderboard"
+                class="btn secondary"
+            >
+                View Leaderboard
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LEADERBOARD ================= -->
+
+<section id="leaderboard" class="section alt">
+
+    <div class="section-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                02 / SCORES
+            </p>
+
+            <h2>
+                Local Leaderboard
+            </h2>
+
+        </div>
+
+        <button
+            id="clearScoresBtn"
+            class="btn danger"
+            type="button"
+        >
+            Clear Scores
+        </button>
+
+    </div>
+
+
+    <div class="leaderboard-wrap panel">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>#</th>
+                    <th>Player</th>
+                    <th>Score</th>
+                    <th>Accuracy</th>
+                    <th>Date</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="leaderboardBody"></tbody>
+
+        </table>
+
+        <p id="emptyScores" class="empty-state">
+            No scores yet. Complete the quiz to appear here.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WEATHER ================= -->
+
+<section id="weather" class="section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                03 / WEATHER
+            </p>
+
+            <h2>
+                Weather Dashboard
+            </h2>
+
+        </div>
+
+        <span class="api-note">
+            Powered by Open-Meteo
+        </span>
+
+    </div>
+
+
+    <div class="weather-search">
+
+        <input
+            id="cityInput"
+            type="text"
+            value="Bhopal"
+            placeholder="Search city, e.g. Delhi"
+        >
+
+        <button
+            id="weatherBtn"
+            class="btn primary"
+            type="button"
+        >
+            Search Weather
+        </button>
+
+    </div>
+
+
+    <p
+        id="weatherStatus"
+        class="weather-status"
+    >
+        Loading Bhopal weather...
+    </p>
+
+
+    <div class="weather-layout">
+
+        <!-- CURRENT WEATHER -->
+
+        <div class="weather-main panel">
+
+            <div class="location-row">
+
+                <div>
+
+                    <p class="muted">
+                        CURRENT WEATHER
+                    </p>
+
+                    <h3 id="weatherCity">
+                        Bhopal
+                    </h3>
+
+                    <p id="weatherDescription">
+                        Loading...
+                    </p>
+
+                </div>
+
+                <div
+                    id="weatherIcon"
+                    class="weather-icon"
+                >
+                    ☀️
+                </div>
+
+            </div>
+
+
+            <div class="temperature">
+
+                <span id="temperature">
+                    --
+                </span>
+
+                <sup>
+                    °C
+                </sup>
+
+            </div>
+
+
+            <div class="weather-details">
+
+                <div>
+
+                    <span>
+                        Feels like
+                    </span>
+
+                    <b id="feelsLike">
+                        --
+                    </b>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Humidity
+                    </span>
+
+                    <b id="humidity">
+                        --
+                    </b>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Wind
+                    </span>
+
+                    <b id="wind">
+                        --
+                    </b>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORECAST -->
+
+        <div class="forecast panel">
+
+            <div class="forecast-head">
+
+                <h3>
+                    5-Day Forecast
+                </h3>
+
+                <span>
+                    Daily
+                </span>
+
+            </div>
+
+            <div id="forecastList"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <span>
+        Quiz + Weather Dashboard
+    </span>
+
+    <span>
+        Built with HTML • CSS • JavaScript
+    </span>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
